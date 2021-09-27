@@ -6,7 +6,7 @@ import Modal from './modal';
 import EnumMembership from './enum-membership';
 import EnumCourseType from './enum-courseType';
 import CourseService from "./services/course.service";
-//import Vimeo from '@u-wave/react-vimeo';
+import Vimeo from '@u-wave/react-vimeo';
 //lazy loading or code splitting
 import Loadable from "react-loadable";
 import Loading from "./loading";
@@ -322,16 +322,9 @@ class Player extends React.Component {
             }
         }
     }
-    // onPlayerEnd = (subTopicId) => {
-    //     let subtopicIndex = this.props.allSubTopics.indexOf(subTopicId);
-    //     if (subtopicIndex < this.props.allSubTopics.length) {
-    //         let index = subtopicIndex + 1;
-    //         this.setState({ index: subtopicIndex });
-    //         let nextsubTopicId = this.props.allSubTopics[index];
-    //         this.onEnded(nextsubTopicId);
-    //     }
-    // }
-    onEnded = (subTopicId) => {
+    
+    onEnded = () => {
+        let subTopicId = this.props.allSubTopics[this.state.index + 1];
         this.setIndex(subTopicId);
         const topics = this.props.topics;
         //setting specific subtopic play
@@ -364,6 +357,32 @@ class Player extends React.Component {
             }
         }
     }
+
+    handlePlayerPause() {
+        console.log('Player paused');
+    }
+
+    handlePlayerPlay() {
+        console.log('Player play');
+    }  
+
+    handleSeek() {
+        console.log('User is skipping video and seek to another time');
+    }
+
+    handleVideoLoad() {
+        console.log('New video is loaded into player');
+    }
+
+    onPlayerError(error) {
+        console.log('Error: ', error);
+    }
+
+    sideBarRowClick(event) {
+        event.currentTarget.checked = !event.currentTarget.checked;
+        console.log('hell', event.currentTarget.checked);
+    }
+    
     render() {
         let content = '';
         if (this.props.store.playerState.isLock && this.props.membershipId <= 0) {
@@ -383,13 +402,8 @@ class Player extends React.Component {
         else {
             switch (this.props.store.playerState.topicType) {
                 case EnumTopicType.Video:
-                    content = <iframe id="iframeVideo" style={{ height: 670, width: '100%', border: 0 }} src={this.props.store.playerState.content + "?autoplay=1"} frameBorder="{0}" allowFullScreen />
-                    // content =<div id="iframeVideo"><Vimeo
-                    //     height={600}
-                    //     autoplay={true}
-                    //     video={this.props.store.playerState.content} autoplay
-                    //     onEnd={() => this.onPlayerEnd(this.props.store.playerState.childIndex)} />
-                    //     </div>
+                    content = <Vimeo video={this.props.store.playerState.content} className="vimeo-video" width={'100'} height={670} autoplay={true} onPause={this.handlePlayerPause}
+                        onPlay={this.handlePlayerPlay} onEnd={this.onEnded} onSeeked={this.handleSeek} onLoaded={this.handleVideoLoad} onError={this.onPlayerError} />
                     break;
                 case EnumTopicType.Article:
                     content = <Article key={this.props.store.playerState.childIndex} />
@@ -409,6 +423,8 @@ class Player extends React.Component {
                 case EnumTopicType.Quiz:
                     content = <Quiz key={this.props.store.playerState.subTopicId} />
                     break;
+                default:
+                    console.log('Nothing found');
             }
         }
         return (

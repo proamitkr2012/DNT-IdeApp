@@ -1052,6 +1052,23 @@ pad-t50 {
     color: red;
     text-align: left;
 }
+
+.vimeo-video {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 0;
+    height: 0;
+    overflow: hidden;        
+}
+
+.vimeo-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
 /* React Spinner Start*/
 .spinner {
     width: 100%;
