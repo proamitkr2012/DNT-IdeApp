@@ -5,6 +5,7 @@ import * as playerActions from "./redux/actions/playerActions";
 import Modal from './modal';
 import EnumMembership from './enum-membership';
 import EnumCourseType from './enum-courseType';
+import EnumTopicType from "./enum-topicType";
 import CourseService from "./services/course.service";
 import Vimeo from '@u-wave/react-vimeo';
 //lazy loading or code splitting
@@ -43,14 +44,6 @@ const UpgradePrompt = Loadable({
     loader: () => import("./upgrade-prompt"),
     loading: Loading
 });
-const EnumTopicType = {
-    Video: 1,
-    Quiz: 2,
-    Article: 3,
-    Excercise: 4,
-    CodeSandbox: 5,
-    TPCodeSandbox: 6
-};
 
 class Player extends React.Component {
     constructor(props) {
@@ -60,7 +53,7 @@ class Player extends React.Component {
             courseId: this.props.courseId,
             subTopicId: 0,
             topicType: '',
-            index: 0,
+            index: 0, //index of played video/subtopic
             UrlPath: '',
             defaultPlay: true,
             fileDownload: true,
@@ -138,10 +131,8 @@ class Player extends React.Component {
             });
 
         } else {
-            //console.log(this.state.subTopicId);
             //don't set player state for double click
             if (this.state.subTopicId == 0 || this.state.subTopicId != childIndex) {
-                // console.log('2');
                 this.setState({ subTopicId: childIndex });
                 this.props.savePlayerState({
                     playerState: {
@@ -275,17 +266,17 @@ class Player extends React.Component {
         }
     }
 
-    downloadFile = (url, subTopicId, contentType) => {      
-        if (this.props.membershipId > 0 && this.props.membershipId != EnumMembership.Trial) {           
+    downloadFile = (url, subTopicId, contentType) => {
+        if (this.props.membershipId > 0 && this.props.membershipId != EnumMembership.Trial) {
             window.open(url, '_blank');
             //this.SetContentHistory(url, subTopicId, contentType);
             CourseService.SetContentHistory(url, this.props.courseId, this.props.TopicId, subTopicId, contentType)
-            .then(res => { 
-                console.log('content'); 
-            })
-            .catch(err => {
-                console.log(err);
-            });
+                .then(res => {
+                    console.log('content');
+                })
+                .catch(err => {
+                    console.log(err);
+                });
         }
         else
             this.setState({ fileDownload: false });
@@ -322,7 +313,7 @@ class Player extends React.Component {
             }
         }
     }
-    
+
     onEnded = () => {
         let subTopicId = this.props.allSubTopics[this.state.index + 1];
         this.setIndex(subTopicId);
@@ -364,7 +355,7 @@ class Player extends React.Component {
 
     handlePlayerPlay() {
         console.log('Player play');
-    }  
+    }
 
     handleSeek() {
         console.log('User is skipping video and seek to another time');
@@ -382,7 +373,7 @@ class Player extends React.Component {
         event.currentTarget.checked = !event.currentTarget.checked;
         console.log('hell', event.currentTarget.checked);
     }
-    
+
     render() {
         let content = '';
         if (this.props.store.playerState.isLock && this.props.membershipId <= 0) {
@@ -393,7 +384,7 @@ class Player extends React.Component {
             content = <UpgradePrompt userId={this.props.userId} accessibility={this.props.accessibility} membershipId={this.props.membershipId} />
         }
         //for preventing project course access
-        else if (this.props.store.playerState.isLock && (this.props.membershipId == EnumMembership.Trial || this.props.membershipId == EnumMembership.Monthly || this.props.membershipId == EnumMembership.Quarterly) && (this.props.courseType==EnumCourseType.Project)) {
+        else if (this.props.store.playerState.isLock && (this.props.membershipId == EnumMembership.Trial || this.props.membershipId == EnumMembership.Monthly || this.props.membershipId == EnumMembership.Quarterly) && (this.props.courseType == EnumCourseType.Project)) {
             content = <UpgradePrompt userId={this.props.userId} accessibility={this.props.accessibility} membershipId={this.props.membershipId} />
         }
         else if (!this.state.fileDownload) {
@@ -444,11 +435,12 @@ class Player extends React.Component {
                         <ul className="nav__list">
                             {
                                 this.props.topics.map((topic, index) => {
+                                    console.log(`${index}:${this.props.store.playerState.index}`);
                                     return <li key={topic.TopicId}>
                                         <input id={"group-topic-" + topic.TopicId} type="checkbox" hidden defaultChecked={index == this.props.store.playerState.index} />
                                         <label htmlFor={"group-topic-" + topic.TopicId} className="topic">
                                             {topic.TopicName}<span className="fa fa-angle-right" /></label>
-                                        <ul className="group-list">
+                                        <ul className={"group-list " + (index == this.props.store.playerState.index && 'list-expand')}>
                                             {
                                                 topic.SubTopics.map((subTopic) => {
                                                     return <li key={subTopic.SubTopicId} className={this.props.store.playerState.childIndex == subTopic.SubTopicId ? 'topic-active' : ''}>
@@ -506,7 +498,6 @@ class Player extends React.Component {
                                                                 }
                                                             </div>
                                                         </a>
-
                                                     </li>
                                                 })
                                             }
@@ -521,7 +512,8 @@ class Player extends React.Component {
                     <div className="w3-teal">
                         <button id="openme" onClick={this.openme} className="w3-button w3-teal w3-medium" style={{ display: 'none' }}><img src="/images/vhome.png" height="26px" /></button>
                         <button id="closeme" onClick={this.closeme} style={{ display: 'block' }} className="w3-button w3-teal w3-medium"><img src="/images/vbak.png" height="26px" /></button>
-                        {this.props.store.playerState.topicType != EnumTopicType.Excercise &&
+                        {
+                            this.props.store.playerState.topicType != EnumTopicType.Excercise &&
                             <span className="topicheader">
                                 <span>{this.props.store.playerState.topicName}</span>
                                 <span style={{ float: 'right', marginRight: '330px', marginTop: '-4px' }} id="spanlogo">

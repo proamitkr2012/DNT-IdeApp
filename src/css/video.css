@@ -1115,17 +1115,20 @@ a {
     transition: max-height .5s ease-in-out;
 }
 /* reset the height when checkbox is checked */
-.nav__list input[type=checkbox]:checked + label + ul { 
+.list-expand{
     max-height: 1000px;
 }
-
-.nav__list input[type=checkbox] + label + ul { 
+.nav__list input[type=checkbox]:checked + label + ul { 
+    max-height: 1000px;
+} 
+/* Commented to fix auto collapse issue in left sidebar*/
+ /* .nav__list input[type=checkbox] + label + ul { 
     max-height: 0px;
-}
+}  */
 
-.nav__list input[type=checkbox]:not(:checked) + label + ul { 
+ /* .nav__list input[type=checkbox]:not(:checked) + label + ul { 
     max-height: 0px;
-}
+} */
 
 
 /*** Rotating chevron icon*/

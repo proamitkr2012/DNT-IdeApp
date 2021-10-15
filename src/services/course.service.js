@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseAddress = window.location.origin.indexOf('3000') > -1 ? 'https://localhost:44383' : window.location.origin;
+const baseAddress = window.location.origin.indexOf('3000') > -1 ? 'https://www.dotnettricks.com' : window.location.origin;
 
 class CourseService {
     GetCourseDetails = () => {
