@@ -1119,6 +1119,15 @@ a {
     max-height: 1000px;
 }
 
+.nav__list input[type=checkbox] + label + ul { 
+    max-height: 0px;
+}
+
+.nav__list input[type=checkbox]:not(:checked) + label + ul { 
+    max-height: 0px;
+}
+
+
 /*** Rotating chevron icon*/
 label > span {
     float: right;
