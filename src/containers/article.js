@@ -1,13 +1,13 @@
 ﻿import React from "react";
 import { connect } from "react-redux";
-import * as articleActions from "./redux/actions/articleActions";
+import * as articleActions from "../redux/actions/articleActions";
 
 //lazy loading or code splitting
 import Loadable from "react-loadable";
-import Loading from "./components/loading";
+import Loading from "../components/loading";
 
 const InlineEditor = Loadable({
-    loader: () => import("./inline-editor"),
+    loader: () => import("../components/inline-editor"),
     loading: Loading
 });
 

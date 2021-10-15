@@ -1,8 +1,8 @@
 ﻿import React from "react";
-import Editor from "./components/editor";
+import Editor from "../components/editor";
 import SplitPane from "react-split-pane";
 import { connect } from "react-redux";
-import * as articleActions from "./redux/actions/articleActions";
+import * as articleActions from "../redux/actions/articleActions";
 
 class HandsOn extends React.Component {
     constructor(props) {

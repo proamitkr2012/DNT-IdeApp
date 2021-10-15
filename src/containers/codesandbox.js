@@ -1,5 +1,5 @@
 ﻿import React from "react";
-import Editor from "./components/editor";
+import Editor from "../components/editor";
 import { connect } from "react-redux";
 
 class CodeSandbox extends React.Component {

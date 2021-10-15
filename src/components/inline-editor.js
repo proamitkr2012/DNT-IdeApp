@@ -1,10 +1,10 @@
 import React from "react";
 import MonacoEditor from "react-monaco-editor";
-import EditorService from "./services/editor.service";
+import EditorService from "../services/editor.service";
 import SplitPane from "react-split-pane";
-import DownloadLink from "./lib/downloadLink";
+import DownloadLink from "../lib/downloadLink";
 import { connect } from "react-redux";
-import * as articleActions from "./redux/actions/articleActions";
+import * as articleActions from "../redux/actions/articleActions";
 
 class InlineEditor extends React.Component {
     constructor(props) {

@@ -14,23 +14,23 @@ import Loadable from "react-loadable";
 import Loading from "./components/loading";
 
 const Article = Loadable({
-    loader: () => import("./article"),
+    loader: () => import("./containers/article"),
     loading: Loading
 });
 const Quiz = Loadable({
-    loader: () => import("./quiz"),
+    loader: () => import("./containers/quiz"),
     loading: Loading
 });
 const HandsOn = Loadable({
-    loader: () => import("./handson"),
+    loader: () => import("./containers/handson"),
     loading: Loading
 });
 const CodeSandbox = Loadable({
-    loader: () => import("./codesandbox"),
+    loader: () => import("./containers/codesandbox"),
     loading: Loading
 });
 const TPCodeSandbox = Loadable({
-    loader: () => import("./tp-sandbox"),
+    loader: () => import("./containers/tp-sandbox"),
     loading: Loading
 });
 const Prompt = Loadable({
