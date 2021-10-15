@@ -421,7 +421,7 @@ class Player extends React.Component {
         }
         return (
             <div className="app">
-                <div className="w3-sidebar w3-bar-block w3-card-2 w3-animate-left" id="mySidebar">
+                <div className="w3-sidebar w3-animate-left" id="mySidebar">
                     <div className="course-heading">
                         <a href={this.props.courseUrl} style={{ color: '#fff' }} title="Go back to Course">
                             <div className="course-logo">
@@ -529,7 +529,7 @@ class Player extends React.Component {
                             </span>
                         }
                     </div>
-                    <div className="players" id="player1-container">
+                    <div className="players">
                         <div className="media-wrapper">
                             {content}
                             {(this.props.membershipId > 0 || !this.props.store.playerState.isLock) && <div className="div-controls">
