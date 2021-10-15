@@ -1,8 +1,8 @@
 import React from "react";
 import MonacoEditor from "react-monaco-editor";
-import EditorService from "./services/editor.service";
+import EditorService from "../services/editor.service";
 import SplitPane from "react-split-pane";
-import DownloadLink from "./lib/downloadLink";
+import DownloadLink from "../lib/downloadLink";
 
 export default class Editor extends React.Component {
     constructor(props) {

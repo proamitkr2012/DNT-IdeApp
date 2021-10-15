@@ -1,5 +1,5 @@
 ﻿import React from "react";
-import Editor from "./editor";
+import Editor from "./components/editor";
 import SplitPane from "react-split-pane";
 import { connect } from "react-redux";
 import * as articleActions from "./redux/actions/articleActions";

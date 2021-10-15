@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import Modal from './modal';
-import EnumAccessibility from './enum-accessibility';
-import UnlockButton from './lib/unlockButton';
-import EnumMembership from './enum-membership';
+import EnumAccessibility from '../enums/enum-accessibility';
+import UnlockButton from '../lib/unlockButton';
+import EnumMembership from '../enums/enum-membership';
 
 export default class prompt extends Component {
     constructor(props) {

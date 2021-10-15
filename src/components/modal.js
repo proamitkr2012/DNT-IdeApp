@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import CourseService from './services/course.service';
+import CourseService from '../services/course.service';
 
 export default class modal extends Component {
     formFields = {

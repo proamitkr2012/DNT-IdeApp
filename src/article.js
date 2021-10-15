@@ -4,7 +4,7 @@ import * as articleActions from "./redux/actions/articleActions";
 
 //lazy loading or code splitting
 import Loadable from "react-loadable";
-import Loading from "./loading";
+import Loading from "./components/loading";
 
 const InlineEditor = Loadable({
     loader: () => import("./inline-editor"),

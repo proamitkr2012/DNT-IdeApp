@@ -2,15 +2,16 @@
 import { connect } from "react-redux";
 import CryptoJS from 'crypto-js';
 import * as playerActions from "./redux/actions/playerActions";
-import Modal from './modal';
-import EnumMembership from './enum-membership';
-import EnumCourseType from './enum-courseType';
-import EnumTopicType from "./enum-topicType";
+import Modal from './components/modal';
+import EnumMembership from './enums/enum-membership';
+import EnumCourseType from './enums/enum-courseType';
+import EnumTopicType from "./enums/enum-topicType";
 import CourseService from "./services/course.service";
 import Vimeo from '@u-wave/react-vimeo';
+
 //lazy loading or code splitting
 import Loadable from "react-loadable";
-import Loading from "./loading";
+import Loading from "./components/loading";
 
 const Article = Loadable({
     loader: () => import("./article"),
@@ -33,15 +34,15 @@ const TPCodeSandbox = Loadable({
     loading: Loading
 });
 const Prompt = Loadable({
-    loader: () => import("./prompt"),
+    loader: () => import("./components/prompt"),
     loading: Loading
 });
 const CodePrompt = Loadable({
-    loader: () => import("./code-prompt"),
+    loader: () => import("./components/code-prompt"),
     loading: Loading
 });
 const UpgradePrompt = Loadable({
-    loader: () => import("./upgrade-prompt"),
+    loader: () => import("./components/upgrade-prompt"),
     loading: Loading
 });
 
