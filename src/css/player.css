@@ -1068,16 +1068,13 @@ pad-t50 {
     width: 100%;
     height: 100%;
 }
-
 /* React Spinner Start*/
 .spinner {
     width: 100%;
     height: 100%;
 }
-
     .spinner > div {
         display: flex;
         justify-content: center;
         align-items: center;
     }
-/* React Spinner End */
