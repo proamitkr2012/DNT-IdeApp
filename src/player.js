@@ -97,8 +97,8 @@ class Player extends React.Component {
         var width = window.innerWidth;
         document.getElementById("openme").style.display = "none";
         document.getElementById("closeme").style.display = "block";
-        document.getElementById("main").style.marginLeft = width > 500 ? "320px" : "220px";
-        document.getElementById("mySidebar").style.width = width > 500 ? "320px" : "220px";
+        document.getElementById("main").style.marginLeft = width > 500 ? "320px" : "100%";
+        document.getElementById("mySidebar").style.width = width > 500 ? "320px" : "100%";
         document.getElementById("mySidebar").style.display = "block";
         var logo = document.getElementById("spanlogo");
         if (logo)

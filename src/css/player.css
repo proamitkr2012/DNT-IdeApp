@@ -976,16 +976,16 @@ pad-t50 {
     }
 
     .course-heading {
-        width: 220px
+        width: 100%;
     }
    
     #mySidebar {
-        width: 220px;
+        width: 100%;
         display: block;
     }
 
     #main {
-        margin-left: 220px;
+        margin-left: 100%;
     }
 
     #loginbtn {
@@ -997,6 +997,10 @@ pad-t50 {
         #loginbtn .btn {
             width: 175px;
         }
+        .text-middle{
+            padding-right: 30px;
+        }
+        #closeme{margin-left: -50px;}
 }
 
 .modal-header {
